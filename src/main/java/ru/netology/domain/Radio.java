@@ -2,71 +2,91 @@ package ru.netology.domain;
 
 public class Radio {
 
-    private int currentChanel = 0;
-    private int currentVolume = 0;
+    private int currentChanel;
+    private int totalChanel = 10;
+    private int currentVolume;
+    private int maxVolume = 100;
+
+    private int minVolume = 0;
+
+
+
+    public Radio() {
+
+    }
+    public Radio(int totalChanel) {
+        this.totalChanel = totalChanel;
+    }
+
+
 
     public int getNewChanel() {
         return currentChanel;
     }
-    public void setCurrentVolume(int currentVolume) {
-        this.currentVolume = currentVolume;
+
+
+
+    public void setCurrentChannel(int currentChannel) {
+        if (currentChannel > (totalChanel - 1)) {
+            return;
+        }
+        if (currentChannel < 0) {
+            return;
+        }
+        this.currentChanel = currentChannel;
     }
 
-    public void setNewChanel(int newChanel) {
-        if (newChanel >= 0) {
-            currentChanel = newChanel;
-        }
-        if (newChanel <= 9) {
-            currentChanel = newChanel;
-        }
+    public int getCurrentChannel() {
+        return currentChanel;
     }
 
-    public int nextChanel() {
-        if (currentChanel < 9) {
-            currentChanel = currentChanel + 1;
-            return currentChanel;
-        }
-        if (currentChanel == 9) {
-            currentChanel = 0;
-            return currentChanel;
-        }
-        return 0;
+    public int getTotalChanel() {
+        return totalChanel;
     }
 
+    public void increaseChannel() {
 
-    public int prevChanel() {
-        if (currentChanel > 0) {
-            currentChanel = currentChanel - 1;
-            return currentChanel;
+        if (currentChanel == (totalChanel - 1)) {
+            setCurrentChannel(0);
+            return;
         }
+        setCurrentChannel(++currentChanel);
+
+    }
+
+    public void prevChannel() {
+
         if (currentChanel == 0) {
-            currentChanel = 9;
-            return currentChanel;
+            setCurrentChannel(totalChanel - 1);
+            return;
         }
-        return 0;
+        setCurrentChannel(--currentChanel);
+
     }
 
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
 
-    public int addVolume() {
-        if (currentVolume < 10) {
+    public void setCurrentVolume(int volume) {
+        if (volume > maxVolume) {
+            return;
+        }
+        if (volume < minVolume) {
+            return;
+        }
+        this.currentVolume = volume;
+    }
+
+    public void increaseVolume() {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
-            return currentVolume;
         }
-        if (currentVolume == 10) {
-            return currentVolume;
-        }
-        return 0;
     }
 
-    public int downVolume() {
-
-        if (currentVolume <= 0) {
-            return 0;
+    public void prevVolume() {
+        if (currentVolume > 0) {
+            currentVolume = currentVolume - 1;
         }
-        if (currentVolume <= 10) {
-            return currentVolume - 1;
-        }
-
-        return 10;
     }
 }
