@@ -180,4 +180,14 @@ public class RadioTest {
 
         assertEquals(8, radio.getCurrentChannel());
     }
+
+    @Test
+    public void currentVolumeOverMax() {
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(101);
+        radio.increaseVolume();
+
+        assertEquals(1, radio.getCurrentVolume());
+    }
 }
