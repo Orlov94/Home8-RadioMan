@@ -171,7 +171,7 @@ public class RadioTest {
     }
 
     @Test
-    void getCurrentChannel(){
+    void getCurrentChannel1(){
         Radio radio = new Radio();
 
         radio.setCurrentChannel(8);
